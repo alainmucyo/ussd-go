@@ -1,8 +1,8 @@
 package ussd
 
 import (
-	"github.com/samora/ussd-go/sessionstores"
 	"strings"
+	"ussd-go/sessionstores"
 )
 
 type session struct {

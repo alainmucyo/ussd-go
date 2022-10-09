@@ -1,9 +1,9 @@
 package ussd
 
 import (
-	"github.com/samora/ussd-go/sessionstores"
 	"github.com/stretchr/testify/suite"
 	"testing"
+	"ussd-go/sessionstores"
 )
 
 const DummyServiceCode = "*123#"

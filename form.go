@@ -1,6 +1,6 @@
 package ussd
 
-import "github.com/samora/ussd-go/validator"
+import "ussd-go/validator"
 
 // Form is a USSD form.
 type Form struct {

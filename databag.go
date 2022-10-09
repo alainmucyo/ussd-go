@@ -2,7 +2,7 @@ package ussd
 
 import (
 	"encoding/json"
-	"github.com/samora/ussd-go/sessionstores"
+	"ussd-go/sessionstores"
 )
 
 // DataBag is a key-value store.

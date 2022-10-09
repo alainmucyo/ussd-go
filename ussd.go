@@ -1,10 +1,10 @@
 package ussd
 
 import (
-	"github.com/samora/ussd-go/sessionstores"
 	"log"
 	"reflect"
 	"regexp"
+	"ussd-go/sessionstores"
 )
 
 // Middleware func
