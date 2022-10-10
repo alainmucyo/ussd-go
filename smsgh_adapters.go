@@ -11,9 +11,9 @@ type SmsghRequest struct {
 
 func (s *SmsghRequest) GetRequest() *Request {
 	return &Request{
-		SessionId:   s.Mobile,
-		Text:        s.Message,
-		PhoneNumber: s.Operator,
+		Mobile:  s.Mobile,
+		Message: s.Message,
+		Network: s.Operator,
 	}
 }
 

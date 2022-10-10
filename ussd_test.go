@@ -17,9 +17,9 @@ type UssdSuite struct {
 
 func (u *UssdSuite) SetupSuite() {
 	u.request = &Request{}
-	u.request.SessionId = "233246662003"
-	u.request.PhoneNumber = "vodafone"
-	u.request.Text = DummyServiceCode
+	u.request.Mobile = "233246662003"
+	u.request.Network = "vodafone"
+	u.request.Message = DummyServiceCode
 
 	u.store = sessionstores.NewRedis("localhost:6379")
 
@@ -43,33 +43,33 @@ func (u UssdSuite) TestUssd() {
 	u.False(response.Release)
 	u.Contains(response.Message, "Welcome")
 
-	u.request.Text = "1"
+	u.request.Message = "1"
 	response = u.ussd.process(u.store, data, u.request)
 	u.Contains(response.Message, "Enter Name")
 
-	u.request.Text = "Samora"
+	u.request.Message = "Samora"
 	response = u.ussd.process(u.store, data, u.request)
 	u.False(response.Release)
 	u.Contains(response.Message, "Select Sex")
 
-	u.request.Text = "1"
+	u.request.Message = "1"
 	response = u.ussd.process(u.store, data, u.request)
 	u.False(response.Release)
 	u.Contains(response.Message, "Enter Age")
 
-	u.request.Text = "twenty"
+	u.request.Message = "twenty"
 	response = u.ussd.process(u.store, data, u.request)
 	u.False(response.Release)
 	u.Contains(response.Message, "integer")
 
-	u.request.Text = "29"
+	u.request.Message = "29"
 	response = u.ussd.process(u.store, data, u.request)
 	u.True(response.Release)
 	u.Contains(response.Message, "Master Samora")
 
-	u.request.Text = "*123*"
+	u.request.Message = "*123*"
 	u.ussd.process(u.store, data, u.request)
-	u.request.Text = "0"
+	u.request.Message = "0"
 	response = u.ussd.process(u.store, data, u.request)
 	u.Equal("Bye bye.", response.Message)
 }

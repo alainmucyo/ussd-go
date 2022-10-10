@@ -14,7 +14,7 @@ type DataBag struct {
 }
 
 func newDataBag(store sessionstores.Store, request *Request) *DataBag {
-	name := request.SessionId + "DataBag"
+	name := request.Mobile + "DataBag"
 	return &DataBag{
 		name:  name,
 		store: store,

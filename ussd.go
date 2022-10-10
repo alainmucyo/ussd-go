@@ -19,7 +19,7 @@ type route struct {
 
 // Request from USSD.
 type Request struct {
-	SessionId, Text, PhoneNumber, ServiceCode, Action string
+	Mobile, Message, Network string
 }
 
 // Response to USSD.
@@ -82,8 +82,8 @@ func (u Ussd) process(store sessionstores.Store, data Data, request *Request) Re
 	}
 	defer u.store.Close()
 
-	request.PhoneNumber = StrLower(request.PhoneNumber)
-	request.Text = StrTrim(request.Text)
+	request.Network = StrLower(request.Network)
+	request.Message = StrTrim(request.Message)
 
 	// setup context
 	u.context = new(Context)
@@ -123,11 +123,11 @@ func (u Ussd) ProcessNsano(store sessionstores.Store, data Data, request *NsanoR
 }
 
 func (u Ussd) exec() Response {
-	if u.context.Request.Text == "" {
+	if u.context.Request.Message == "" {
 		u.end()
 		return Response{}
 	}
-	if u.initiationRegexp.MatchString(u.context.Request.Text) == true {
+	if u.initiationRegexp.MatchString(u.context.Request.Message) == true {
 		return u.onInitiation()
 	}
 	return u.onResponse()
@@ -145,7 +145,7 @@ func (u Ussd) onResponse() Response {
 		exists := u.session.Exists()
 		if !exists {
 			panicln("ussd: User %v's session not found",
-				u.context.Request.SessionId)
+				u.context.Request.Mobile)
 		}
 		r := u.session.Get()
 

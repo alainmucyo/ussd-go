@@ -13,7 +13,7 @@ type session struct {
 func newSession(store sessionstores.Store, request *Request) *session {
 	return &session{
 		store:    store,
-		routeKey: request.SessionId + "Route",
+		routeKey: request.Mobile + "Route",
 	}
 }
 

@@ -20,7 +20,7 @@ func (f *FormSuite) SetupSuite() {
 	f.form = form
 }
 
-func (f *FormSuite) TestForm() {
+func (f FormSuite) TestForm() {
 	form := f.form
 
 	f.Equal(len(form.Inputs), 3)
