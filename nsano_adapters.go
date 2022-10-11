@@ -8,9 +8,9 @@ type NsanoRequest struct {
 
 func (n *NsanoRequest) GetRequest() *Request {
 	return &Request{
-		Mobile:  n.MSISDN,
-		Message: n.Message,
-		Network: n.Network,
+		SessionId:   n.MSISDN,
+		Text:        n.Message,
+		PhoneNumber: n.Network,
 	}
 }
 

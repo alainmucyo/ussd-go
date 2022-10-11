@@ -24,9 +24,9 @@ func (d *DataBagSuite) SetupSuite() {
 	err := d.store.Connect()
 	d.Nil(err)
 	d.request = &Request{}
-	d.request.Mobile = "233246662003"
-	d.request.Network = "vodafone"
-	d.request.Message = "*123#"
+	d.request.SessionId = "233246662003"
+	d.request.PhoneNumber = "vodafone"
+	d.request.Text = "*123#"
 	d.key = "name"
 	d.value = "Samora"
 	d.databag = newDataBag(d.store, d.request)
@@ -38,7 +38,7 @@ func (d *DataBagSuite) TearDownSuite() {
 }
 
 func (d *DataBagSuite) TestDataBag() {
-	name := d.request.Mobile + "DataBag"
+	name := d.request.SessionId + "DataBag"
 
 	err := d.databag.Set(d.key, d.value)
 	d.Nil(err)
