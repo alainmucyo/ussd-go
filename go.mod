@@ -1,4 +1,4 @@
-module ussd-go
+module github.com/alainmucyo/ussd-go
 
 go 1.18
 
