@@ -1,6 +1,6 @@
 package ussd
 
-import "ussd-go/validator"
+import "github.com/alainmucyo/ussd-go/validator"
 
 // Form is a USSD form.
 type Form struct {

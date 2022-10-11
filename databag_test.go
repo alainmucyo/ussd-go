@@ -1,9 +1,9 @@
 package ussd
 
 import (
+	"github.com/alainmucyo/ussd-go/sessionstores"
 	"github.com/stretchr/testify/suite"
 	"testing"
-	"ussd-go/sessionstores"
 )
 
 type DataBagSuite struct {

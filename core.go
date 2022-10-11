@@ -3,8 +3,8 @@ package ussd
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/alainmucyo/ussd-go/validator"
 	"strconv"
-	"ussd-go/validator"
 )
 
 type core struct {

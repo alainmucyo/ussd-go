@@ -1,9 +1,9 @@
 package ussd
 
 import (
+	"github.com/alainmucyo/ussd-go/sessionstores"
 	"github.com/stretchr/testify/suite"
 	"testing"
-	"ussd-go/sessionstores"
 )
 
 const DummyServiceCode = "*123#"
@@ -28,10 +28,10 @@ func (u *UssdSuite) SetupSuite() {
 	u.ussd.Ctrl(new(demo))
 }
 
-func (u *UssdSuite) TearDownSuite() {
+/*func (u *UssdSuite) TearDownSuite() {
 	u.ussd.end()
 }
-
+*/
 func (u *UssdSuite) TestUssd() {
 
 	u.Equal(1, len(u.ussd.middlewares))

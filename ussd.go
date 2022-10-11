@@ -1,10 +1,10 @@
 package ussd
 
 import (
+	"github.com/alainmucyo/ussd-go/sessionstores"
 	"log"
 	"reflect"
 	"regexp"
-	"ussd-go/sessionstores"
 )
 
 // Middleware func
