@@ -49,9 +49,7 @@ func (cr core) FormInputDisplay(c *Context) Response {
 		displayName = input.DisplayName
 	}
 	msg := StrEmpty
-	if form.Title != StrEmpty {
-		msg += form.Title + StrNewLine
-	}
+
 	if form.ValidationMessage != StrEmpty {
 		msg += form.ValidationMessage + StrNewLine
 	}

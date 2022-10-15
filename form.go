@@ -4,11 +4,11 @@ import "github.com/alainmucyo/ussd-go/validator"
 
 // Form is a USSD form.
 type Form struct {
-	Title, ValidationMessage string
-	Route                    route
-	ProcessingPosition       int
-	Data                     FormData
-	Inputs                   []input
+	ValidationMessage  string
+	Route              route
+	ProcessingPosition int
+	Data               FormData
+	Inputs             []input
 }
 
 // NewForm creates a new form.
