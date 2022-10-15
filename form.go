@@ -12,9 +12,8 @@ type Form struct {
 }
 
 // NewForm creates a new form.
-func NewForm(title string) *Form {
+func NewForm() *Form {
 	return &Form{
-		Title:  StrTrim(title),
 		Data:   make(FormData),
 		Inputs: make([]input, 0),
 	}

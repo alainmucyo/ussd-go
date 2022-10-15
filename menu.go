@@ -40,8 +40,8 @@ func (m *Menu) AddZero(name, ctrl, action string) *Menu {
 func (m Menu) render() string {
 	msg := StrEmpty
 
-	for i, item := range m.Items {
-		msg += fmt.Sprintf("%d. %v"+StrNewLine, i+1, item.Name)
+	for _, item := range m.Items {
+		msg += fmt.Sprintf("%v"+StrNewLine, item.Name)
 	}
 	if m.ZeroItem != nil {
 		msg += "0. " + m.ZeroItem.Name + StrNewLine

@@ -45,17 +45,17 @@ func (u *UssdSuite) TestUssd() {
 
 	u.request.Text = "1"
 	response = u.ussd.process(u.store, data, u.request)
-	u.Contains(response.Message, "Enter Name")
+	u.Contains(response.Message, "Name")
 
 	u.request.Text = "Samora"
 	response = u.ussd.process(u.store, data, u.request)
 	u.False(response.Release)
-	u.Contains(response.Message, "Select Sex")
+	u.Contains(response.Message, "Sex")
 
 	u.request.Text = "1"
 	response = u.ussd.process(u.store, data, u.request)
 	u.False(response.Release)
-	u.Contains(response.Message, "Enter Age")
+	u.Contains(response.Message, "Age")
 
 	u.request.Text = "twenty"
 	response = u.ussd.process(u.store, data, u.request)

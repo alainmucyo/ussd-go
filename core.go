@@ -56,17 +56,17 @@ func (cr core) FormInputDisplay(c *Context) Response {
 		msg += form.ValidationMessage + StrNewLine
 	}
 	if !input.hasOptions() {
-		msg += fmt.Sprintf("Enter %v:"+StrNewLine, displayName)
+		msg += fmt.Sprintf("%v"+StrNewLine, displayName)
 	} else {
-		msg += fmt.Sprintf("Select %v:"+StrNewLine, displayName)
-		for i, option := range input.Options {
+		msg += fmt.Sprintf("%v"+StrNewLine, displayName)
+		for _, option := range input.Options {
 			value := StrEmpty
 			if StrTrim(option.DisplayValue) == StrEmpty {
 				value = option.Value
 			} else {
 				value = option.DisplayValue
 			}
-			msg += fmt.Sprintf("%d. %v"+StrNewLine, i+1, value)
+			msg += fmt.Sprintf("%v"+StrNewLine, value)
 		}
 	}
 	return c.Render(msg, "core", "FormInputProcessor")

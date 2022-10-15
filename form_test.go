@@ -11,7 +11,7 @@ type FormSuite struct {
 }
 
 func (f *FormSuite) SetupSuite() {
-	form := NewForm("User Registration")
+	form := NewForm()
 	form.Input("Name", StrEmpty)
 	form.Input("Sex", StrEmpty,
 		form.Option("M", "Male"),

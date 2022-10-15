@@ -17,7 +17,7 @@ func (d demo) Menu(c *Context) Response {
 }
 
 func (d demo) GreetMeForm(c *Context) Response {
-	form := NewForm("Greet Me")
+	form := NewForm()
 	form.Input("Name", StrEmpty)
 	form.Input("Sex", StrEmpty,
 		form.Option("M", "Male"),
