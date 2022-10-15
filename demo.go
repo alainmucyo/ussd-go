@@ -10,8 +10,7 @@ type demo struct {
 
 func (d demo) Menu(c *Context) Response {
 	menu := NewMenu()
-	menu.Header = "Welcome"
-	menu.Add("Greet me", "demo", "GreetMeForm")
+	menu.Add("Welcome, \nGreet me", "demo", "GreetMeForm")
 	menu.AddZero("Exit", "demo", "Exit")
 	log.Printf("demo: %+v\n", d)
 	return c.RenderMenu(menu)

@@ -6,9 +6,8 @@ import (
 
 // Menu for USSD
 type Menu struct {
-	Header, Footer string
-	Items          []*menuItem
-	ZeroItem       *menuItem
+	Items    []*menuItem
+	ZeroItem *menuItem
 }
 
 type menuItem struct {
@@ -40,15 +39,12 @@ func (m *Menu) AddZero(name, ctrl, action string) *Menu {
 // render USSD menu.
 func (m Menu) render() string {
 	msg := StrEmpty
-	if m.Header != StrEmpty {
-		msg += m.Header + StrNewLine
-	}
+
 	for i, item := range m.Items {
 		msg += fmt.Sprintf("%d. %v"+StrNewLine, i+1, item.Name)
 	}
 	if m.ZeroItem != nil {
 		msg += "0. " + m.ZeroItem.Name + StrNewLine
 	}
-	msg += m.Footer
 	return msg
 }
