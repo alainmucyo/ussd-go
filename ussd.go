@@ -75,11 +75,13 @@ func (u *Ussd) Ctrl(c interface{}) {
 
 // Process USSD request.
 func (u Ussd) process(store sessionstores.Store, data Data, request *Request) Response {
+	log.Println("Received processing request, connecting to redis")
 	u.store = store
 	err := u.store.Connect()
 	if err != nil {
 		log.Panicln(err)
 	}
+	log.Println("Connected to Redis")
 	defer u.store.Close()
 
 	request.PhoneNumber = StrLower(request.PhoneNumber)
@@ -92,12 +94,14 @@ func (u Ussd) process(store sessionstores.Store, data Data, request *Request) Re
 	u.context.Request = request
 
 	// setup session
+	log.Println("Setup session")
 	u.session = newSession(u.store, u.context.Request)
-
+	log.Println("Done setup session, executing middlewares")
 	// execute middlewares
 	for _, m := range u.middlewares {
 		m(u.context)
 	}
+	log.Println("Done executing middlewares")
 
 	return u.exec()
 }
@@ -106,20 +110,6 @@ func (u Ussd) process(store sessionstores.Store, data Data, request *Request) Re
 func (u Ussd) Process(store sessionstores.Store, data Data, request RequestAdapter, response ResponseAdapter) {
 	res := u.process(store, data, request.GetRequest())
 	response.SetResponse(res)
-}
-
-// ProcessSmsgh processes USSD from SMSGH
-func (u Ussd) ProcessSmsgh(store sessionstores.Store, data Data, request *SmsghRequest) SmsghResponse {
-	response := SmsghResponse{}
-	u.Process(store, data, request, &response)
-	return response
-}
-
-// ProcessNsano processes USSD from Nsano
-func (u Ussd) ProcessNsano(store sessionstores.Store, data Data, request *NsanoRequest) NsanoResponse {
-	response := NsanoResponse{}
-	u.Process(store, data, request, &response)
-	return response
 }
 
 func (u Ussd) exec() Response {
@@ -148,8 +138,9 @@ func (u Ussd) onResponse() Response {
 				u.context.Request.SessionId)
 		}
 		r := u.session.Get()
-
+		log.Println("Executing handler")
 		res := u.execHandler(r)
+		log.Println("Done executing handler")
 		if res.err != nil {
 			log.Println(res.err)
 			u.end()
