@@ -75,7 +75,6 @@ func (u *Ussd) Ctrl(c interface{}) {
 
 // Process USSD request.
 func (u Ussd) process(store sessionstores.Store, data Data, request *Request) Response {
-	log.Println("Received processing request")
 	u.store = store
 	request.PhoneNumber = StrLower(request.PhoneNumber)
 	request.Text = StrTrim(request.Text)
@@ -87,14 +86,11 @@ func (u Ussd) process(store sessionstores.Store, data Data, request *Request) Re
 	u.context.Request = request
 
 	// setup session
-	log.Println("Setup session")
 	u.session = newSession(u.store, u.context.Request)
-	log.Println("Done setup session, executing middlewares")
 	// execute middlewares
 	for _, m := range u.middlewares {
 		m(u.context)
 	}
-	log.Println("Done executing middlewares")
 
 	return u.exec()
 }
@@ -131,9 +127,7 @@ func (u Ussd) onResponse() Response {
 				u.context.Request.SessionId)
 		}
 		r := u.session.Get()
-		log.Println("Executing handler")
 		res := u.execHandler(r)
-		log.Println("Done executing handler")
 		if res.err != nil {
 			log.Println(res.err)
 			u.end()
