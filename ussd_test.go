@@ -22,7 +22,11 @@ func (u *UssdSuite) SetupSuite() {
 	u.request.Text = DummyServiceCode
 
 	u.store = sessionstores.NewRedis("localhost:6379")
-
+	err := u.store.Connect()
+	if err != nil {
+		println("Can't connect Redis")
+		return
+	}
 	u.ussd = New("demo", "Menu")
 	u.ussd.Middleware(addData("global", "i'm here"))
 	u.ussd.Ctrl(new(demo))

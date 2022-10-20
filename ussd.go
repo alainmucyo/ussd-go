@@ -75,15 +75,8 @@ func (u *Ussd) Ctrl(c interface{}) {
 
 // Process USSD request.
 func (u Ussd) process(store sessionstores.Store, data Data, request *Request) Response {
-	log.Println("Received processing request, connecting to redis")
+	log.Println("Received processing request")
 	u.store = store
-	err := u.store.Connect()
-	if err != nil {
-		log.Panicln(err)
-	}
-	log.Println("Connected to Redis")
-	defer u.store.Close()
-
 	request.PhoneNumber = StrLower(request.PhoneNumber)
 	request.Text = StrTrim(request.Text)
 
