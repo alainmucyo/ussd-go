@@ -21,7 +21,7 @@ func (cr core) MenuProcessor(c *Context) Response {
 	if err != nil {
 		return c.Err(err)
 	}
-	errMsg := c.Request.Text + " is not an option"
+	errMsg := c.Request.Text + " is not an Option"
 	choice, err := strconv.ParseInt(c.Request.Text, 10, 8)
 	if err != nil || int(choice) > len(menu.Items) || int(choice) < 0 {
 		return c.Release(errMsg)
@@ -128,12 +128,12 @@ func saveForm(c *Context, f *Form) error {
 	return c.DataBag.Set(coredataForm, string(b))
 }
 
-func getFormInputValue(c *Context, input input) (string, error) {
+func getFormInputValue(c *Context, input Input) (string, error) {
 	if !input.hasOptions() {
 		return c.Request.Text, nil
 	}
 	errNotExist := fmt.Errorf(
-		"Selected option %v does not exist.", c.Request.Text)
+		"Selected Option %v does not exist.", c.Request.Text)
 	choice, err := strconv.ParseInt(c.Request.Text, 10, 8)
 	if err != nil {
 		return StrEmpty, errNotExist
@@ -144,7 +144,7 @@ func getFormInputValue(c *Context, input input) (string, error) {
 	return input.Options[choice-1].Value, nil
 }
 
-func validateInput(i input, value string) error {
+func validateInput(i Input, value string) error {
 	for _, vData := range i.Validators {
 		f := validator.Map[vData.Key]
 		err := f(value, vData.Args...)

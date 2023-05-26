@@ -29,7 +29,7 @@ func (n *NsanoResponse) SetResponse(response Response) {
 		n.USSDResp.Action = "prompt"
 		n.USSDResp.Menus = response.Message
 	} else {
-		n.USSDResp.Action = "input"
+		n.USSDResp.Action = "Input"
 		n.USSDResp.Title = response.Message
 	}
 }

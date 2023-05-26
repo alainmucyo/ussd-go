@@ -27,7 +27,7 @@ func (c Context) Release(msg string) Response {
 }
 
 // Render to USSD client. Expects USSD client to respond with
-// input which will be mapped to specified route.
+// Input which will be mapped to specified route.
 func (c Context) Render(msg, ctrl, action string) Response {
 	r := Response{}
 	r.Message = StrTrim(msg)
@@ -46,7 +46,7 @@ func (c Context) RenderMenu(menu *Menu) Response {
 	return c.Render(menu.render(), "core", "MenuProcessor")
 }
 
-// RenderForm starts the form input collection process.
+// RenderForm starts the form Input collection process.
 func (c Context) RenderForm(form *Form, ctrl, action string) Response {
 	form.Route = route{StrTrim(ctrl), StrTrim(action)}
 	b, err := json.Marshal(form)

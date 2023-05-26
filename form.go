@@ -8,20 +8,20 @@ type Form struct {
 	Route              route
 	ProcessingPosition int
 	Data               FormData
-	Inputs             []input
+	Inputs             []Input
 }
 
 // NewForm creates a new form.
 func NewForm() *Form {
 	return &Form{
 		Data:   make(FormData),
-		Inputs: make([]input, 0),
+		Inputs: make([]Input, 0),
 	}
 }
 
-// Input adds an input to USSD form.
+// Input adds an Input to USSD form.
 func (f *Form) Input(name, displayName string,
-	options ...option) *Form {
+	options ...Option) *Form {
 	input := newInput(StrTrim(name), StrTrim(displayName))
 	for _, option := range options {
 		input.Options = append(input.Options, option)
@@ -30,7 +30,7 @@ func (f *Form) Input(name, displayName string,
 	return f
 }
 
-// Validate input. See validator.Map for available validators.
+// Validate Input. See validator.Map for available validators.
 func (f *Form) Validate(validatorKey string, args ...string) *Form {
 	validatorKey = StrTrim(StrLower(validatorKey))
 	if _, ok := validator.Map[validatorKey]; !ok {
@@ -46,20 +46,20 @@ func (f *Form) Validate(validatorKey string, args ...string) *Form {
 	return f
 }
 
-// Option creates a USSD input option.
-func (f Form) Option(value, displayValue string) option {
-	return option{
+// Option creates a USSD Input Option.
+func (f Form) Option(value, displayValue string) Option {
+	return Option{
 		Value: StrTrim(value), DisplayValue: StrTrim(displayValue),
 	}
 }
 
-type input struct {
+type Input struct {
 	Name, DisplayName string
-	Options           []option
+	Options           []Option
 	Validators        []validatorData
 }
 
-type option struct {
+type Option struct {
 	Value, DisplayValue string
 }
 
@@ -68,15 +68,15 @@ type validatorData struct {
 	Args []string
 }
 
-func newInput(name, displayName string) input {
-	return input{
+func newInput(name, displayName string) Input {
+	return Input{
 		Name:        name,
 		DisplayName: displayName,
-		Options:     make([]option, 0),
+		Options:     make([]Option, 0),
 		Validators:  make([]validatorData, 0),
 	}
 }
 
-func (i input) hasOptions() bool {
+func (i Input) hasOptions() bool {
 	return len(i.Options) > 0
 }
