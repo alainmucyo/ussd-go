@@ -42,7 +42,7 @@ func (s *Redis) Connect() error {
 }
 
 func (s *Redis) expire(key string) {
-	s.client.Cmd("EXPIRE", key, 300)
+	s.client.Cmd("EXPIRE", key, 3000)
 }
 
 func (s *Redis) SetValue(key, value string) error {
